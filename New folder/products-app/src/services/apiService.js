@@ -14,7 +14,12 @@ export const fetchProducts = async () => {
 
 // Fetches details for a single product by its ID
 export const getProductDetails = async (id) => {
-    // implement it using similar logic as fetchProducts function
+    try {
+        const response = await axios.get(`${BASE_URL}/${id}`);
+        return response.data;
+    } catch (error) {
+        throw error; // Rethrow to allow caller to handle
+    }
 };
 
 // Deletes a product by its ID
@@ -35,4 +40,5 @@ export const addProduct = (product) => {
 // Edits an existing product by ID
 export const editProduct = (id, product) => {
     // implement it using similar logic as addProduct function but use axios.put method
+    return axios.put(`${BASE_URL}/${id}`, JSON.stringify(product));
 };
